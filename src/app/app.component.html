@@ -1,0 +1,18 @@
+
+<div class="cust-row">
+  <div class="fill-row"><input [(ngModel)]="currentPatch.name" required placeholder="patch naam" /></div>
+  <div class="fill-row"><input [(ngModel)]="currentPatch.R" type="range" min="0" max="255" (input)="onChangeSliders()" id="sliderR" /> <span>{{currentPatch.R}}</span></div>
+  <div class="fill-row"><input [(ngModel)]="currentPatch.G" type="range" min="0" max="255" (input)="onChangeSliders()" /> <span>{{currentPatch.G}}</span></div>
+  <div class="fill-row"><input [(ngModel)]="currentPatch.B" type="range" min="0" max="255" (input)="onChangeSliders()" /> <span>{{currentPatch.B}}</span></div>
+  <div class="fill-row"><input [(ngModel)]="currentPatch.A" type="range" min="0" max="100" (input)="onChangeSliders()" /> <span>{{currentPatch.A}}</span></div>
+  <div class="fill-row"><button (click)="onClickAddPatch()">Add</button> <button (click)="randomizePatch()">Randomize</button></div>
+  <div class="fill-row"><input [(ngModel)]="nrOfRandos" type="number"/> <button (click)="addNrOfRandomPatches()">Add random</button></div>
+  <div class="fill-row"><button (click)="savePatches()">Save</button> <button (click)="clearPatches()">Clear</button></div>
+</div>
+<div class="cust-row">
+  <div [style.background-color]="currentPatch.rgbaColor" [style.height.px]="boxHeight"></div>
+</div>
+<div class="cust-row" *ngIf="patches.length > 0">
+  <color-patch *ngFor="let patch of patches" [patch]="patch" (updateMainPatch)="onMainPatchUpdate(patch)" (delete)="onPatchDelete($event)"></color-patch>
+</div>
+<app-patch-viewer></app-patch-viewer>
